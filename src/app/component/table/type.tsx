@@ -6,12 +6,13 @@ export interface Data {
   institution: string;
   date: string;
   time: string;
-  status: Status;
+  state: number;
+  stateProgress: string;
 }
 
 export type Order = "asc" | "desc";
 
-export interface HeadCell {
+export interface Columns {
   id: keyof Data;
   label: string;
   align: Alignment;
@@ -25,7 +26,7 @@ interface Options {
   maxwidth?: number;
   minwidth?: number;
   isBlod?: boolean;
-  aling?: Alignment;
+  align?: Alignment;
   fontSize?: number;
 }
 
@@ -34,12 +35,6 @@ export enum Alignment {
   RIGHT = "right",
   CENTER = "center",
 }
-
-export enum Status {
-  NONE = "",
-  IN_PROGRESS = "in-progress",
-}
-
 export interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
@@ -50,9 +45,11 @@ export interface EnhancedTableProps {
   order: Order;
   orderBy: string;
   rowCount: number;
+  withCheckboxAll?: boolean;
 }
 
 export interface TableProps {
+  withCheckbox?: boolean;
   labelId: string;
   row: Data;
   isItemSelected: boolean;

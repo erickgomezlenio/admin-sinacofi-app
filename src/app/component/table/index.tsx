@@ -1,17 +1,17 @@
 "use client";
 import * as React from "react";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
-import Paper from "@mui/material/Paper";
-import { rows } from "./mock";
-import { Data, Order } from "./type";
-import { getComparator, stableSort } from "./utils";
-import { EnhancedTableHead } from "./components/table-header";
-import TableContentBody from "./components/table-body";
+import { TableHeader } from "./components/table-header-inbox";
+import TableContentRows from "./components/table-rows-inbox";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import { StyledTabCell } from "./styled";
+import { rows } from "./mock";
+import { Data, Order } from "./type";
+import { getComparator, stableSort } from "./utils";
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState<Order>("asc");
@@ -73,7 +73,7 @@ export default function EnhancedTable() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
+  
   const visibleRows = React.useMemo(
     () =>
       stableSort(rows, getComparator(order, orderBy)).slice(
@@ -85,14 +85,15 @@ export default function EnhancedTable() {
 
   return (
     <Paper sx={{ width: "100%", mb: 2 }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 456, maxWidth: 1105 }}>
         <Table
           sx={{ minWidth: 750 }}
           aria-labelledby="tableTitle"
           size="medium"
           stickyHeader
         >
-          <EnhancedTableHead
+          <TableHeader
+            withCheckboxAll
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -105,7 +106,8 @@ export default function EnhancedTable() {
               const isItemSelected = isSelected(row.id);
               const labelId = `enhanced-table-checkbox-${index}`;
               return (
-                <TableContentBody
+                <TableContentRows
+                  withCheckbox
                   key={`row-table-data-${row.id}`}
                   row={row}
                   labelId={labelId}
@@ -117,7 +119,7 @@ export default function EnhancedTable() {
             {emptyRows > 0 && (
               <TableRow
                 style={{
-                  height: 53 * emptyRows,
+                  height: 57 * emptyRows,
                 }}
               >
                 <StyledTabCell colSpan={6} />

@@ -1,6 +1,6 @@
-import { HeadCell, Alignment, RowOptions } from "./type";
+import { Columns, Alignment, RowOptions } from "./type";
 
-export const headCells: readonly HeadCell[] = [
+export const columnsInbox: Columns[] = [
   {
     id: "osn",
     label: "OSN",
@@ -28,7 +28,12 @@ export const headCells: readonly HeadCell[] = [
   },
   {
     id: "time",
-    label: "Tiempo",
+    label: "Hora",
+    align: Alignment.LEFT,
+  },
+  {
+    id: "state",
+    label: "Estado",
     align: Alignment.LEFT,
   },
 ];
@@ -39,32 +44,36 @@ export const rowOptions: RowOptions = {
     // minwidth: number,
     // isBlod: bool,
     // fontSize: number,
-    aling: Alignment.LEFT,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   osn: {
-    aling: Alignment.CENTER,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   ms: {
-    aling: Alignment.LEFT,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   message: {
-    maxwidth: 400,
-    aling: Alignment.CENTER,
+    maxwidth: 450,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   institution: {
-    aling: Alignment.LEFT,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   date: {
-    aling: Alignment.LEFT,
+    align: Alignment.LEFT,
     fontSize: 14,
   },
   time: {
-    aling: Alignment.LEFT,
+    align: Alignment.LEFT,
+    fontSize: 14,
+  },
+  state: {
+    align: Alignment.LEFT,
     fontSize: 14,
   },
 };
